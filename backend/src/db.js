@@ -2,12 +2,12 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
-// Ensure data directory exists
-const userProfile = process.env.USERPROFILE || 'C:\\Users\\himan';
-const dataDir = path.join(userProfile, '.gemini', 'antigravity-ide', 'db');
+// Cross-platform path: works on Windows locally and Linux on Render
+const dataDir = process.env.DB_DATA_DIR || path.join(__dirname, '../data');
 fs.mkdirSync(dataDir, { recursive: true });
 
 const dbPath = path.join(dataDir, 'rental_chatbot.db');
+console.log('🗄️  Database path:', dbPath);
 const db = new Database(dbPath);
 
 // Enable WAL mode for better performance
