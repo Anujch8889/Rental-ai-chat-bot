@@ -13,15 +13,18 @@ const router = express.Router();
 router.post('/start', async (req, res) => {
   try {
     const sessionId = uuidv4();
-    createLead(sessionId);
 
-    // Generate initial greeting from AI
+    console.log('[START] Step 1: Creating lead in DB...');
+    createLead(sessionId);
+    console.log('[START] Step 2: Lead created. Calling Gemini...');
+
     const greeting = await chat([
       { role: 'user', content: 'Hi' },
     ]);
+    console.log('[START] Step 3: Gemini replied. Saving message...');
 
-    // Save the greeting as assistant message
     addMessage(sessionId, 'assistant', greeting);
+    console.log('[START] Step 4: Done!');
 
     res.json({
       success: true,
@@ -29,10 +32,11 @@ router.post('/start', async (req, res) => {
       message: greeting,
     });
   } catch (error) {
-    console.error('Error starting chat:', error);
-    res.status(500).json({ success: false, error: 'Failed to start chat session' });
+    console.error('[START] ❌ FULL ERROR:', error.stack || error.message || error);
+    res.status(500).json({ success: false, error: error.message || 'Failed to start chat session' });
   }
 });
+
 
 /**
  * POST /api/chat
