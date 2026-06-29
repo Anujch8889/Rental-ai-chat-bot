@@ -3,11 +3,14 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const chatRoutes = require('./routes/chat');
 const adminRoutes = require('./routes/admin');
 
 // Frontend build path (relative to repo root when deployed)
 const FRONTEND_DIST = path.join(__dirname, '../../frontend/dist');
+console.log('📁 Frontend dist path:', FRONTEND_DIST);
+console.log('📁 Dist exists:', fs.existsSync(FRONTEND_DIST));
 
 const app = express();
 const PORT = process.env.PORT || 5000;
