@@ -43,7 +43,7 @@ async function extractLeadData(messages) {
       .join('\n');
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-flash-lite',
+      model: 'gemini-2.0-flash',
       contents: `Here is the conversation:\n\n${conversationText}`,
       config: {
         systemInstruction: EXTRACTION_PROMPT,
