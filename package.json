@@ -1,0 +1,16 @@
+{
+  "name": "rental-ai-chatbot",
+  "version": "1.0.0",
+  "description": "Rental AI Chatbot Workspace",
+  "scripts": {
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "ngrok:frontend": "npx ngrok http 5173 --authtoken 3013JkwCE4Qg2jjjjbrvE4uVMex_4MNq6Kx4o7Zrh6hJ8WUHR",
+    "ngrok:backend": "npx ngrok http 5000 --authtoken 3013JkwCE4Qg2jjjjbrvE4uVMex_4MNq6Kx4o7Zrh6hJ8WUHR",
+    "ngrok": "npx concurrently \"npm run ngrok:backend\" \"npm run ngrok:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
