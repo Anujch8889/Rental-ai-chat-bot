@@ -2,8 +2,12 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const chatRoutes = require('./routes/chat');
 const adminRoutes = require('./routes/admin');
+
+// Frontend build path (relative to repo root when deployed)
+const FRONTEND_DIST = path.join(__dirname, '../../frontend/dist');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,9 +40,19 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ success: false, error: 'Route not found' });
+// ──────────────────────────────────────
+// Serve Frontend (React App)
+// ──────────────────────────────────────
+app.use(express.static(FRONTEND_DIST));
+
+// React Router — sab unknown routes ke liye index.html
+app.get('*', (req, res) => {
+  const indexPath = path.join(FRONTEND_DIST, 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      res.status(404).json({ success: false, error: 'Route not found' });
+    }
+  });
 });
 
 // Global error handler
