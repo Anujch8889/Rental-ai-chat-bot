@@ -6,7 +6,7 @@
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend && echo 'Build complete!'",
+    "build": "npm install --prefix backend && echo 'Build complete!'",
     "start": "node backend/src/index.js",
     "ngrok:frontend": "npx ngrok http 5173 --authtoken 3013JkwCE4Qg2jjjjbrvE4uVMex_4MNq6Kx4o7Zrh6hJ8WUHR",
     "ngrok:backend": "npx ngrok http 5000 --authtoken 3013JkwCE4Qg2jjjjbrvE4uVMex_4MNq6Kx4o7Zrh6hJ8WUHR",

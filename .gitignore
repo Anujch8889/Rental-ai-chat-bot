@@ -18,10 +18,13 @@ node_modules/
 # ==============================
 # Build Outputs
 # ==============================
-dist/
+# backend dist (if any)
+backend/dist/
 build/
 out/
 .output/
+# frontend/dist is COMMITTED to git for Render deployment
+# dist/   ← intentionally not ignored
 
 # ==============================
 # Logs
